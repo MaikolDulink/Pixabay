@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" v-for="i in images" :key="i.id">
+          <px-cards
+            :title="i.type"
+            :description="i.user"
+            :img="i.previewURL"
+          ></px-cards>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import PxCards from "@/components/PxCards";
+import pixar from "@/apis/pixar.js";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    PxCards,
+  },
+  data() {
+    return {
+      images: [],
+    };
+  },
+
+  created() {
+    pixar.getPixars().then((images) => (this.images = images));
+  },
+};
 </script>
