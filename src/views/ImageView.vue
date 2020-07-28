@@ -1,15 +1,30 @@
 <template>
   <main>
-    <div class="card text-left">
-      <img
-        class="card-img-top"
-        :src="img.previewURL"
-        :alt="img.user"
-        style="width:250px; heigth:100px;"
-      />
-      <div class="card-body">
-        <h4 class="card-title">{{ img.user }}</h4>
-        <p class="card-text">{{ img.id }}</p>
+    <div class="container ">
+      <div class="card text-center d-flex flex-column mx-auto col-6">
+        <img class="card-img-top" :src="img.previewURL" :alt="img.user" />
+        <div class="card-body">
+          <button
+            type="button"
+            @click="img.likes++"
+            class="btn btn-primary my-2"
+          >
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              class="bi bi-star-fill"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+              />
+            </svg>
+            <span class="badge badge-light mx-1"> {{ img.likes }}</span>
+          </button>
+          <h4 class="card-title">{{ img.user }}</h4>
+        </div>
       </div>
     </div>
   </main>
@@ -26,12 +41,14 @@ export default {
   },
   methods: {
     getImg() {
-      const id = this.route.params.id;
-      Promise.all([pixar.getPixar(id)]).then((img) => (this.img = img));
+      const id = this.$route.params.id;
+      console.log(id);
+      Promise.all([pixar.getPixar(id)]).then(([img]) => (this.img = img));
     },
   },
   created() {
     this.getImg();
+    console.log(this.img);
   },
 };
 </script>

@@ -10,6 +10,9 @@
 
 <script>
 export default {
+  props: {
+    id: Number,
+  },
   methods: {
     buttonClick() {
       this.$emit("custom-click");

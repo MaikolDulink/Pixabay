@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <div class="container">
-      <div class="row">
+      <div class="row ">
         <div class="col-md-3" v-for="i in images" :key="i.id">
           <px-cards
             :title="i.type"
             :description="i.user"
             :img="i.previewURL"
+            :id="i.id"
           ></px-cards>
         </div>
       </div>
@@ -34,3 +35,9 @@ export default {
   },
 };
 </script>
+<style>
+.my-flex-card > div > div.card {
+  height: calc(100% - 15px);
+  margin-bottom: 15px;
+}
+</style>
